@@ -15,14 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 // Menampilkan form input
-Route::get('/fuzzy', [FuzzyController::class, 'index'])->name('fuzzy.index');
+Route::get('/', [FuzzyController::class, 'index'])->name('fuzzy.index');
 
 // Memproses input dan menampilkan hasil
-Route::post('/fuzzy/calculate', [CalculateController::class, 'fuzzy'])->name('fuzzy.calculate');
-Route::get('/fuzzy/calculate', [CalculateController::class, 'fuzzy']);
+Route::post('/fuzzy', [CalculateController::class, 'fuzzy'])->name('fuzzy.calculate');
+Route::get('/fuzzy', [CalculateController::class, 'fuzzy']);
 
