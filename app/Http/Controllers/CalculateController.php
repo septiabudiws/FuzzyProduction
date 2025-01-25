@@ -133,9 +133,17 @@ class CalculateController extends Controller
 
         $hasil = $totalHasil / $jumlah_mu;
 
-        if ($hasil == 0) {
+        $stokRendah = $this->stok_rendah($stok);
+        $stokSedang = $this->stok_sedang($stok);
+        $stokTinggi = $this->stok_tinggi($stok);
+
+        $permintaanRendah = $this->permintaan_rendah($permintaan);
+        $permintaanSedang = $this->permintaan_sedang($permintaan);
+        $permintaanTinggi = $this->permintaan_tinggi($permintaan);
+
+        if ($hasil >= 0 && $hasil <=5) {
             $kategori = "Tidak Produksi";
-        } elseif (0 < $hasil && $hasil <= 10) {
+        } elseif (5 < $hasil && $hasil <= 10) {
             $kategori = "Produksi Kecil";
         } elseif (10 < $hasil && $hasil <= 25) {
             $kategori = "Produksi Sedang";
@@ -170,6 +178,6 @@ class CalculateController extends Controller
         // $hasil_akhir = $total_bobot > 0 ? $total_nilai / $total_bobot : 0;
 
         // Redirect ke view fuzzy_result dengan data
-        return view('fuzzy_result', compact('hasil', 'kategori', 'stok', 'permintaan'));
+        return view('fuzzy_result', compact('hasil', 'kategori', 'stok', 'permintaan', 'stokRendah', 'stokSedang', 'stokTinggi', 'permintaanRendah', 'permintaanSedang', 'permintaanTinggi'));
     }
 }
